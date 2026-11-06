@@ -1,7 +1,5 @@
 # Puzzled
 
-![logo](./assets/logo.png)
+<img src="./assets/favicon.svg" width="256" alt="Puzzled" />
 
-## About
-
-This organization supports my personal namespace and certain internal solutions I am working on.
+Welcome to `pzzld-org`! A personal namespace for my projects and solutions.
