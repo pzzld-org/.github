@@ -1,21 +1,28 @@
 
-# ----- [CONFIG] -----
+## ----- [CONFIG] -----
 **/.config/*.config.*
 
 **/settings.local.*
 
 !**/settings.default.*
-.axiom/config/bots/*.toml.bak
 
 !**/.config/default.config.*
 
 
-# ----- [DOTENV] -----
-*.env
-*.env.*
+### ----- [DIRENV] -----
+**/.direnv/
 
 *.local.envrc
 *.envrc.local
+
+*.envrc.prod
+prod.envrc
+
+## ----- [DOTENV] -----
+*.env
+*.env.*
+
+
 
 *.secret.envrc
 *.envrc.secret
@@ -31,7 +38,7 @@
 
 *.secret
 
-# ----- [SHEPHERD] ------
+## ----- [SHEPHERD] ------
 # .artifacts/ is scratch + FABLE's toolkit. Sprint report DELIVERABLES belong in
 # .shepherd/runs/{run}/reports/ (not ignored); durable ones in .shepherd/docs/reports/.
 **/.artifacts/backups/
@@ -50,22 +57,25 @@
 !.shepherd/.gitkeep
 !**/.shepherd/models/
 
-# ----- [AGENTS] -----
+## ----- [WORKTREES] -----
+**/.worktrees/
+**/worktrees/
+
+## ----- [AGENTS] -----
 **/.agents/agent-memory/
 **/.agents/todos/
 
-# ----- [CLAUDE] -----
+## ----- [AGENTS] -----
 **/.claude/agent-memory/
 **/.claude/todos/
+# Claude Code scheduler lock (JSON: sessionId, pid, procStart): machine-local
+# session state. Was excluded only by an untracked .git/info/exclude.
+**/.claude/scheduled_tasks.lock
 
 **/.remember/tmp
 **/remember/tmp
 
-# ----- [WORKTREES] -----
-**/.worktrees/
-**/worktrees/
-
-# ----- [PYTHON] -----
+## ----- [PYTHON] -----
 **/.venv/
 **/__pycache__/
 
@@ -77,45 +87,65 @@
 *.pyo
 *.pyd
 
-# ----- [NODEJS] -----
+## ----- [NODEJS] -----
 **/build/
 **/node_modules/
+**/.wrangler/
+**/.dev.vars
+**/.dev.vars.*
 
-# ----- [TYPESCRIPT] -----
+## ----- [TYPESCRIPT] -----
 *.tsbuildinfo
 
-# ----- [ATOM] -----
+## ----- [ATOM] -----
 **/.atom/
 
-# ----- [IntelliJ] -----
+## ----- [IntelliJ] -----
 **/.idea/
 
 *.iml
 *.ipr
 *.iws
 
-# ----- [VSCODE] -----
+## ----- [VSCODE] -----
 **/.vscode/mcp.json
 **/.vscode/mcp.json
 
-# ----- [WSL] -----
+## ----- [WSL] -----
 *:Zone.Identifier
 
-# ----- [NIX] -----
-**/.nix
+
+## ----- [NIX] -----
+# Local build out-links (e.g. `nix build --out-link .nix/build`). Tracked pins live in nix/pins.nix.
 **/.nix-channels
+**/.nix/build
+**/.nix/cache
+**/.nix/channels
+**/.nix/out
+**/.nix/output
+**/.nix/outlink
+**/.nix/result
+**/.nix/tmp
+
+**/out
+**/result
 
 !**/flake.lock
 
-# ----- [ONNX] -----
+## ----- [OPENCHAMBER] -----
+# OpenChamber session state
+.openchamber/*.local.json
+
+
+## ----- [ONNX] -----
 *.onnx.data
 
-# ----- [PI-CODING-AGENT] -----
+## ----- [PI-CODING-AGENT] -----
 **/.pi
 
 !**/.pi/settings.json
 
-# ----- [RUST] -----
+## ----- [RUST] -----
 **/rust_out
 **/target/
 # Lane-private CARGO_TARGET_DIR (shepherd sprint convention: each worktree
@@ -130,7 +160,7 @@ target-*/
 
 !**/Cargo.lock
 
-# ----- [PI] -----
+## ----- [PI] -----
 **/.pi/**/artifacts
 **/.pi/**/missions
 **/.pi/fabric
@@ -138,16 +168,16 @@ target-*/
 
 !**/.pi/settings.json
 
-# ----- [SUPABASE] -----
+## ----- [SUPABASE] -----
 **/supabase/.temp/
 
 polymarket-builder.json
 
-# ----- [MCP] -----
+## ----- [MCP] -----
 **/.mcp.json
 **/mcp.json
 
-# ----- [AXIOM] -----
+## ----- [AXIOM] -----
 **/.axiom/.init
 **/.axiom/cache/
 **/.axiom/data/
@@ -156,11 +186,19 @@ polymarket-builder.json
 /.axiom/axiom/spill/clob-ticks.jsonl
 /.axiom/axiom/spill/spot-ticks.jsonl
 .axiom/axiom/spill/**
+# Runtime state the old nested layout (era.json, .clean_shutdown, spill) and
+# stale devcontainer/.env.example setups write into the tracked .axiom/ workdir.
+.axiom/axiom/
+.axiom/var/
+# Settings writer lock and generation ledger: crates/config/src/io/utils.rs
+# appends `.lock` and `.lock.generations.json` to any settings path
+# (bin/node/settings.json.lock, settings.local.json.lock). Runtime state.
+*.json.lock*
 
 !.axiom/**/.gitkeep
 !**/axiom.toml
 
-# ----- [DIRECTORIES] -----
+## ----- [DIRECTORIES] -----
 **/.DS_Store
 **/build/
 **/cache/
@@ -170,7 +208,7 @@ polymarket-builder.json
 **/temp/
 
 
-# ----- [FILE-EXTENSIONS] -----
+## ----- [FILE-EXTENSIONS] -----
 *.bak
 *.bak.*
 
@@ -179,8 +217,11 @@ polymarket-builder.json
 
 *.db
 *.db.*
-
 *.db-*
+
+*.exit
+*.exit.*
+*.exit-*
 
 *.gz
 *.gz.*
@@ -191,18 +232,27 @@ polymarket-builder.json
 *.log
 *.log.*
 
+*.out
+*.out.*
+
+
+*.pid
+*.pid.*
+
 *.pem
 
 *.sqlite
 *.sqlite.*
+*.sqlite-*
 
 *.sqlite3
 *.sqlite3.*
+*.sqlite3-*
 
 *.zip
 *.zip.*
 
-# ----- [EXCLUSIONS] -----
+## ----- [EXCLUSIONS] -----
 !**/.gitkeep
 
 !**/src/**/build
@@ -211,7 +261,7 @@ polymarket-builder.json
 !**/src/**/data
 !**/src/**/tmp
 
-# ----- [TRACKED-JUNK CLASSES] -----
+## ----- [TRACKED-JUNK CLASSES] -----
 # Enforced mechanically by .shepherd/scripts/check-tracked-junk.sh. A rule alone
 # cannot hold this line: .shepherd/runs/v039-dev2/events/hooks-2026-08-25.jsonl
 # was ALREADY covered by `runs/**` and still reached 2.8 MB in the index,
@@ -225,3 +275,7 @@ polymarket-builder.json
 *.bak-*
 *.techdebt-draft
 **/events/*.jsonl
+
+# idd plugin: triage.json is the triage record; cache/ is regenerable from GitHub.
+.gitissue/cache/
+
