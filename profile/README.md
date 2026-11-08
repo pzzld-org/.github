@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/favicon.svg" alt="pzzld" width="50%">
+  <img src=https://pzzld.org/assets/brand/favicon.svg" alt="pzzld" width="50%">
   <h1>Puzzled</h1>
   <samp>
     <a href="https://pzzld.org">Website</a> • 
