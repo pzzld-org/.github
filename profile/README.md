@@ -6,9 +6,9 @@
     <a href="https://github.com/pzzld-org">GitHub</a> • 
     <a href="mailto:support@pzzld.org">Contact</a>
   </samp>
-  <br>
-  <br>
   <hr width="75%">
 </div>
 
-Welcome to `pzzld-org`! A personal namespace for my projects and solutions.
+## About
+
+Welcome to `pzzld-org`, a personal organization for various projects covering a wide variety of interests from machine-learning and artificial intelligence to music-theory and pure mathematics to niche products and internal solutions for augmenting a particular workflow.
