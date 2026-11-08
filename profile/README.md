@@ -1,6 +1,11 @@
 <div align="center">
-  <img src=https://pzzld.org/brand/favicon.svg" alt="pzzld" width="50%">
+  <img src="https://pzzld.org/brand/favicon.svg" alt="pzzld" width="50%">
   <h1>Puzzled</h1>
+  <p>
+    <i>
+      Independent research, reusable software, and pragmatic product engineering.
+    </i>
+  </p>
   <samp>
     <a href="https://pzzld.org">Website</a> • 
     <a href="https://github.com/pzzld-org">GitHub</a> • 
